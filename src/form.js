@@ -26,6 +26,13 @@ class MarsForm extends React.Component{
         master: false,
         PhD: false
       },
+      educationValues: {
+        high_school: '',
+        associate: '',
+        bachelor: '',
+        master: '',
+        PhD: ''
+      },
       otherEdu: ''
     }
     this.handleChange = this.handleChange.bind(this);
@@ -62,11 +69,15 @@ class MarsForm extends React.Component{
   }
   
   handleCheckboxChange = (event) => {
-    const educations = this.state.educations;
+    const {educations, educationValues} = this.state;
     let newEducations = {...educations};
     newEducations[event.target.id] = !newEducations[event.target.id];
+    let newEducationValues = {...educationValues};
+    newEducationValues[event.target.id] = newEducations[event.target.id] ? event.target.id : '';
+
     this.setState({
-      educations: newEducations 
+      educations: newEducations,
+      educationValues: newEducationValues 
     })
   }
 
@@ -74,131 +85,204 @@ class MarsForm extends React.Component{
     return (
       <div id='radios' onChange={this.handleRadioChange}>
 
-          <div id='breathe'>
-            <p><b>Can you breathe underwater longer than 1 minute?</b></p>
+        <div id='breathe'>
+          <p><b>Can you breathe underwater longer than 1 minute?</b></p>
 
-            <label htmlFor='yes'>Yes</label>
-            <input type='radio' name='breathe' value='yes' checked={this.state.breathe === 'yes'} id='yes' />&emsp;
+          <label>
+            <input 
+              type='radio' 
+              name='breathe' 
+              value='yes' 
+              checked={this.state.breathe === 'yes'} id='yes' /> Yes
+          </label><br />
 
-            <label htmlFor='no'>No</label>
-            <input type='radio' name='breathe' value='no' checked={this.state.breathe === 'no'} id='no' />&emsp;
+          <label>
+            <input 
+              type='radio' 
+              name='breathe' 
+              value='no' 
+              checked={this.state.breathe === 'no'} id='no' /> No
+          </label><br />
 
-            <label htmlFor='unknown'>I don't know</label>
-            <input type='radio' name='breathe' value='unknown' checked={this.state.breathe === 'unknown'} id='unknown' />
+          <label>
+            <input 
+              type='radio' 
+              name='breathe' 
+              value='unknown' 
+              checked={this.state.breathe === 'unknown'} id='unknown' /> I do not know
+          </label><br />
 
-          </div>
+        </div>
 
-          <div id='marital'>
-            <p><b>What is your marital status?</b></p>
+        <div id='marital'>
+          <p><b>What is your marital status?</b></p>
 
-            <label htmlFor='married'>Married</label>
-            <input type='radio' name='marital' value='married' checked={this.state.marital === 'married'} id='married' />&emsp;
+          <label>
+            <input 
+              type='radio' 
+              name='marital' 
+              value='married' 
+              checked={this.state.marital === 'married'} /> Married
+          </label><br />
 
-            <label htmlFor='unmarried'>Unmarried</label>
-            <input type='radio' name='marital' value='unmarried' checked={this.state.marital === 'unmarried'} id='unmarried' />&emsp;
+          <label>
+            <input 
+              type='radio' 
+              name='marital' 
+              value='unmarried' 
+              checked={this.state.marital === 'unmarried'} /> Unmarried
+          </label><br />
 
-          </div>
+        </div>
 
-          <div id='stress_handling'>
-            <p><b>When you are in a stressful or difficult situation, how do you most frequently react?</b></p>
+        <div id='stress_handling'>
 
-            <input type='radio' name='stress_handling' value='determination' checked={this.state.stress_handling === 'determination'} id='determination' />&ensp;
-            <label htmlFor='determination'>Determination: I continue to confront the situation.</label><br/>
+          <p><b>When you are in a stressful or difficult situation, how do you most frequently react?</b></p>
 
-            <input type='radio' name='stress_handling' value='defeat' checked={this.state.stress_handling === 'defeat'} id='defeat' />&ensp;
-            <label htmlFor='defeat'>Defeat: I stop confronting the situation.</label><br/>
+          <label>
+            <input 
+              type='radio' 
+              name='stress_handling' 
+              value='determination' 
+              checked={this.state.stress_handling === 'determination'} id='determination' /> Determination: I continue to confront the situation.
+          </label><br/>
 
-            <input type='radio' name='stress_handling' value='anger' checked={this.state.stress_handling === 'anger'} id='anger' />&ensp;
-            <label htmlFor='anger'>Anger: I become upset at the situation.</label><br/>
+          <label>
+            <input 
+              type='radio' 
+              name='stress_handling' 
+              value='defeat' 
+              checked={this.state.stress_handling === 'defeat'} /> Defeat: I stop confronting the situation.
+          </label><br/>
 
-            <input type='radio' name='stress_handling' value='resourcefulness' checked={this.state.stress_handling === 'resourcefulness'} id='resourcefulness' />&ensp;
-            <label htmlFor='resourcefulness'>Resourcefulness: I seek help to confront the situation.</label>
+          <label>
+            <input 
+              type='radio' 
+              name='stress_handling' 
+              value='anger' 
+              checked={this.state.stress_handling === 'anger'} /> Anger: I become upset at the situation.
+          </label><br/>
 
-          </div>
+          <label>
+            <input 
+              type='radio' 
+              name='stress_handling' 
+              value='resourcefulness' 
+              checked={this.state.stress_handling === 'resourcefulness'} /> Resourcefulness: I seek help to confront the situation.
+          </label>
 
-          <div id='claustrophobic'>
-            <p><b>Are you claustrophobic?</b></p>
+        </div>
 
-            <label htmlFor='yes'>Yes</label>
-            <input type='radio' name='claustrophobic' value='yes' checked={this.state.claustrophobic === 'yes'} id='yes' />&emsp;
+        <div id='claustrophobic'>
 
-            <label htmlFor='no'>No</label>
-            <input type='radio' name='claustrophobic' value='no' checked={this.state.claustrophobic === 'no'} id='no' />&emsp;
+          <p><b>Are you claustrophobic?</b></p>
 
-            <label htmlFor='unknown'>I don't know</label>
-            <input type='radio' name='claustrophobic' value='unknown' checked={this.state.claustrophobic === 'unknown'} id='unknown' />
+          <label>
+            <input 
+              type='radio' 
+              name='claustrophobic' 
+              value='yes' 
+              checked={this.state.claustrophobic === 'yes'} /> Yes
+          </label><br />
 
-          </div>
+          <label>
+            <input 
+              type='radio' 
+              name='claustrophobic' 
+              value='no' 
+              checked={this.state.claustrophobic === 'no'} /> No
+          </label><br />
+
+          <label>
+            <input 
+              type='radio' 
+              name='claustrophobic' 
+              value='unknown' 
+              checked={this.state.claustrophobic === 'unknown'} /> I do not know.
+          </label><br />
+
+        </div>
 
       </div>
     )
   }
 
   checkboxQuestions () {
-    const {educations, otherEdu} = this.state;
-    // const {educations, value} = this.handleCheckboxChange;
+    const {educations, educationValues, otherEdu} = this.state;
 
     return (
       <>
-        <div>
+        <p><b>Check all educational credentials you have received:</b></p>
 
-          <p><b>Check all educational credentials you have received:</b></p>
-          
-          <input onChange={this.handleCheckboxChange} 
+        <label>
+          <input 
+            onChange={this.handleCheckboxChange} 
             type='checkbox' 
             checked={educations.id} 
-            // value={value} 
-            id='high_school'/>&ensp;
-          <label htmlFor='high_school'>High school diploma or GED equivalent</label><br/>
+            value={educationValues.id} 
+            id='high_school'/> High school diploma or GED equivalent
+        </label><br />
 
-          <input onChange={this.handleCheckboxChange} 
+        <label>
+          <input 
+            onChange={this.handleCheckboxChange} 
             type='checkbox' 
             checked={educations.id}
-            // value={value}
-            id='associate'/>&ensp;
-          <label htmlFor='associate'>Associate's Degree</label><br/>
-
-          <input onChange={this.handleCheckboxChange} 
+            value={educationValues.id} 
+            id='associate'/> Associate Degree
+        </label><br />
+    
+        <label >
+          <input 
+            onChange={this.handleCheckboxChange} 
             type='checkbox' 
             checked={educations.id}
-            // value={value}
-            id='bachelor'/>&ensp;
-          <label htmlFor='bachelor'>Bachelor Degree</label><br/>
+            value={educationValues.id} 
+            id='bachelor'/> Bachelor Degree
+        </label><br />
 
-          <input onChange={this.handleCheckboxChange} 
+        <label >
+          <input 
+            onChange={this.handleCheckboxChange} 
             type='checkbox' 
             checked={educations.id} 
-            // value={value} 
-            id='master'/>&ensp;
-          <label htmlFor='master'>Master's Degree</label><br/>
-
-          <input onChange={this.handleCheckboxChange} 
+            value={educationValues.id} 
+            id='master'/> Master Degree
+        </label><br />
+      
+        <label>
+          <input 
+            onChange={this.handleCheckboxChange} 
             type='checkbox' 
             checked={educations.id} 
-            // value={value} 
-            id='PhD'/>&ensp;
-          <label htmlFor='PhD'>PhD</label><br/>
+            value={educationValues.id} 
+            id='PhD'/> PhD
+        </label><br /><br />
 
-        </div>
-        <label htmlFor='other'>Other</label>&ensp;
-        <input type='text' name='otherEdu' value={!educations.id ? otherEdu : ''} id='other' placeholder='Please typein'/>
+        <label> Other<br />
+          <input 
+            type='text' 
+            name='otherEdu' 
+            value={otherEdu} id='otherEdu' 
+            placeholder='Please typein'/>
+        </label><br />
       </>
-      )
+    )
   }
     
   render() {
     console.log(this.state);
 
-    const {firstname, lastname, dob, countries, country, dietary, reason, formCompleted, formSubmitted, breathe, marital, stress_handling, claustrophobic, educations, otherEdu} = this.state;
+    const {firstname, lastname, dob, countries, country, dietary, reason, formCompleted, formSubmitted, breathe, marital, stress_handling, claustrophobic, educations, educationValues, otherEdu} = this.state;
     
     let options = countries.map(country => {
-        return <option>{country.name}</option>
+      return <option>{country.name}</option>
     });
       
     if(!formCompleted) {
 
       return(
-        <React.Fragment>
+        <>
           <div id='beforeComplete'>
           
             <h1 id='header'>Mission to Mars Registration Form</h1><br/>
@@ -226,7 +310,7 @@ class MarsForm extends React.Component{
                 <option>Vegan</option>
               </select><br/><br/>
 
-              {this.radioQuestions()}<br/>
+              {this.radioQuestions()}
               {this.checkboxQuestions()}<br/><br/>
 
               <label htmlFor='reason'><b>Why do you want to be a Mars explorer?</b></label>
@@ -239,21 +323,21 @@ class MarsForm extends React.Component{
             <button 
               className='submit'
               disabled={
-                !(firstname && lastname && dob && country && dietary && reason && breathe && marital && stress_handling && claustrophobic && educations)
+                !(firstname && lastname && dob && country && dietary && reason && breathe && marital && stress_handling && claustrophobic && (educations.high_school || educations.associate || educations.bachelor || educations.master || educations.PhD || otherEdu))
               }
               onClick={this.handleComplete}>Submit
             </button>
           </div>
-        </React.Fragment>
+        </>
       )
 
     } else if (!formSubmitted) {
+      
         return(
-          <React.Fragment>
+          <>
             <div id='afterComplete'>
               <p> Here is your application details:<br/><br/>
-                <li>First Name:  {firstname}</li>
-                <li>Last Name:  {lastname}</li>
+                <li>Name:  {firstname} {lastname}</li>
                 <li>Date of Birth:  {dob}</li>
                 <li>Country of Origin:  {country}</li>
                 <li>Dietary Preference:  {dietary}</li>
@@ -262,14 +346,14 @@ class MarsForm extends React.Component{
                 <li>Marital status:  {marital}</li>
                 <li>Stress_handling: {stress_handling}</li>
                 <li>Is claustrophobic: {claustrophobic}</li>
-                <li>Eduction: {!educations ? educations : otherEdu}</li>
+                <li>Eduction: {educationValues.high_school} {educationValues.associate} {educationValues.bachelor} {educationValues.master} {educationValues.PhD} {otherEdu}</li>
               </p><br/>
               
               <p>Please check if all information are correct!</p><br/>
 
               <button className='confirm' onClick={this.handleSubmit}>Confirm</button>
             </div>
-          </React.Fragment>
+          </>
         )
     } else {
         return(<p id='afterSubmit'>Thank you for your application!</p>)
